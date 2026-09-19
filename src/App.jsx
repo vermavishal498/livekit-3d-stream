@@ -5,6 +5,7 @@ import Scene3D from './components/Scene3D';
 
 // Replace with your actual LiveKit WebSocket URL
 const LIVEKIT_URL = 'wss://virtual-conferencing-0jl28510.livekit.cloud';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function App() {
   const [token, setToken] = useState('');
@@ -16,7 +17,7 @@ export default function App() {
     if (!username.trim()) return alert('Please enter a username');
 
     try {
-      const res = await fetch(`http://localhost:3001/api/token?room=main-room&username=${encodeURIComponent(username)}`);
+      const res = await fetch(`${API_URL}/api/token?room=main-room&username=${encodeURIComponent(username)}`);
       const data = await res.json();
       setToken(data.token);
       setJoined(true);
